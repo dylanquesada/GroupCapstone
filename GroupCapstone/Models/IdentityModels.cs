@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
 
 namespace GroupCapstone.Models
 {
@@ -17,6 +18,8 @@ namespace GroupCapstone.Models
         public string LastName { get; set; }
 
         public int Rating { get; set; }
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -38,5 +41,7 @@ namespace GroupCapstone.Models
         {
             return new ApplicationDbContext();
         }
+
+      
     }
 }
