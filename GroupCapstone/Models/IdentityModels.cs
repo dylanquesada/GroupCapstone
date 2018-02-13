@@ -21,6 +21,8 @@ namespace GroupCapstone.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        public decimal Price { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
