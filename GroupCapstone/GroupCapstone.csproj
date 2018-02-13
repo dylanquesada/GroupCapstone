@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201802122140122_changed something.Designer.cs">
       <DependentUpon>201802122140122_changed something.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131511013_add price.cs" />
+    <Compile Include="Migrations\201802131511013_add price.Designer.cs">
+      <DependentUpon>201802131511013_add price.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -310,6 +314,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802122140122_changed something.resx">
       <DependentUpon>201802122140122_changed something.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131511013_add price.resx">
+      <DependentUpon>201802131511013_add price.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

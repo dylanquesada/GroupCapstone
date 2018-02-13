@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GroupCapstone.Models;
+using Microsoft.AspNet.Identity;
 
 namespace GroupCapstone.Controllers
 {
@@ -126,8 +127,10 @@ namespace GroupCapstone.Controllers
 
         public ActionResult Customer()
         {
-
-            return View();
+            //find pickup pass in to view
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            return View(result.FirstOrDefault());
         }
 
         public ActionResult Worker()
