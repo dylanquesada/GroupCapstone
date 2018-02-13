@@ -220,6 +220,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\KeyReader.cs" />
     <Compile Include="Migrations\201802131403118_init.cs" />
     <Compile Include="Migrations\201802131403118_init.Designer.cs">
       <DependentUpon>201802131403118_init.cs</DependentUpon>

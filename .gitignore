@@ -8,6 +8,8 @@
 *.user
 *.userosscache
 *.sln.docstates
+ApiKey.JSON
+APIKeysLocal.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
