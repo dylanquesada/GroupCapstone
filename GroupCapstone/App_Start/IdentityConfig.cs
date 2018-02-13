@@ -11,6 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using GroupCapstone.Models;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
 
 namespace GroupCapstone
 {
@@ -28,6 +31,17 @@ namespace GroupCapstone
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your SMS service here to send a text message.
+            // Your Account SID from twilio.com/console
+            var accountSid = "AC99fc2edef8f44d09a81948ecd1e14039";
+            // Your Auth Token from twilio.com/console
+            var authToken = "dcedf53df571669f837b8ef5fdeef40e";
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var smsMessage = MessageResource.Create(
+                to: new PhoneNumber("+1" + message.Destination),
+                from: new PhoneNumber("+13126354857"),
+                body: message.Body);
             return Task.FromResult(0);
         }
     }
