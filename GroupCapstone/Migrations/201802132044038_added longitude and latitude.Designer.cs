@@ -7,13 +7,13 @@ namespace GroupCapstone.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addprice : IMigrationMetadata
+    public sealed partial class addedlongitudeandlatitude : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addprice));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(addedlongitudeandlatitude));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802131511013_add price"; }
+            get { return "201802132044038_added longitude and latitude"; }
         }
         
         string IMigrationMetadata.Source
