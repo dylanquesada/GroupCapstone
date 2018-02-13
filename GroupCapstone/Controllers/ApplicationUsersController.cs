@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using GroupCapstone.Models;
 using Microsoft.AspNet.Identity;
+using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace GroupCapstone.Controllers
 {
@@ -142,5 +144,28 @@ namespace GroupCapstone.Controllers
         {
             return View();
         }
+
+        public ActionResult GetZipMap()
+        {
+            foreach (ApplicationUser a in db.Users)
+            {
+                if (a.Shovelee == true)
+                {
+                    string address = a.Address;
+                    string requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
+
+                    WebRequest request = WebRequest.Create(requestUri);
+                    WebResponse response = request.GetResponse();
+                    XDocument xdoc = XDocument.Load(response.GetResponseStream());
+
+                    XElement result = xdoc.Element("GeocodeResponse").Element("result");
+                    XElement locationElement = result.Element("geometry").Element("location");
+                    XElement lat = locationElement.Element("lat");
+                    XElement lng = locationElement.Element("lng");
+                }
+            }
+            return View("UserHome", "ApplicationUsers");
+        }
+
     }
 }
