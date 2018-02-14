@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace GroupCapstone.Models
 {
@@ -22,6 +23,14 @@ namespace GroupCapstone.Models
         public string Description { get; set; }
 
         public decimal Price { get; set; }
+
+        public bool Shovelee { get; set; }
+
+        public string Latitude { get; set; }
+
+        public string Longitude { get; set; }
+
+        List<string> location = new List<string>();
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
