@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GroupCapstone.Models.ApplicationUser>
+﻿@model List<GroupCapstone.Models.ApplicationUser>
 
 @{
     ViewBag.Title = "Index";
@@ -16,22 +16,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model[0].Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model[0].FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model[0].LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Rating)
+            @Html.DisplayNameFor(model => model[0].Rating)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model[0].Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            @Html.DisplayNameFor(model => model[0].PhoneNumber)
         </th>
         <th></th>
     </tr>
@@ -67,20 +67,22 @@
 <div id="map"></div>
 <script>
     function initMap() {
-        //var arr = JSON.parse('//Html.Raw(Json.Encode(//Model.))')
-        var infoWindow = new google.maps.InfoWindow();
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 4,
-            });
-            for (i = 0; i < Model.Longitude.length; i++) {
-                var data = marker[i]
-                var myLatLng = new google.maps.LatLng(Model.Latitude, Model.Longitude)
-            }
+        var user = @Html.Raw(Json.Encode(Model));
+        map = new google.maps.Map(document.getElementById('map'), {
+           zoom: 4,
+           center: new google.maps.LatLng(10,-87.3),
+           mapTypeId: 'terrain'
+        });
+        for (i = 0; i < user.length; i++) {
+            var myLatLng = new google.maps.LatLng(user[i]['Latitude'], user[i]['Longitude'])
+            
             var marker = new google.maps.Marker({
-                position: myLatlng,
+                position: myLatLng,
                 map: map
             });
+            map.center = myLatLng;
         }
+    }
 
 </script>
 

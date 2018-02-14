@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using GroupCapstone.Models;
+using GroupCapstone.HelperClasses;
 
 namespace GroupCapstone.Controllers
 {
@@ -17,6 +18,7 @@ namespace GroupCapstone.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -151,12 +153,14 @@ namespace GroupCapstone.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, FirstName = model.FirstName, LastName = model.LastName};
+                AddytoLatLong convert = new AddytoLatLong();
+                var ltln = convert.GetLatLng(model.Address);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, FirstName = model.FirstName, LastName = model.LastName, Latitude = ltln[0], Longitude = ltln[1]};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    db.SaveChanges();
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
