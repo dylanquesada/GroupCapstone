@@ -14,10 +14,17 @@ namespace GroupCapstone.HelperClasses
 {
     public class WeatherConnection
     {
-        //public bool StormComing(ApplicationUser User)
-        //{
-        //     API = new GetWeather();
-        //}
+        public bool SnowComing(ApplicationUser user)
+        {
+            var data = GetWeather(user);
+            int temp = data.daily.precipProb.Convert.ToInt32();
+            int precipProb = data.daily.temperatureLow.Convert.ToInt32();
+            if (temp >= .5 && precipProb <= 32)
+            {
+                return true;
+            }
+            return false;
+        }
         public dynamic GetWeather(ApplicationUser user)
         {
             string url = "https://api.darksky.net/forecast/" +
@@ -33,16 +40,16 @@ namespace GroupCapstone.HelperClasses
         }
         //public void SendNotification(ApplicationUser user)
         //{
-        //    var accountSid = HelperClasses.APIKeys.TwilioKey;
-        //    // Your Auth Token from twilio.com/console
-        //    var authToken = HelperClasses.APIKeys.TwilioAuthToken;
+        //     var accountSid = HelperClasses.APIKeys.TwilioKey;
+        // Your Auth Token from twilio.com/console
+        var authToken = HelperClasses.APIKeys.TwilioAuthToken;
 
-        //    TwilioClient.Init(accountSid, authToken);
+        TwilioClient.Init(accountSid, authToken);
 
-        //    var smsMessage = MessageResource.Create(
-        //        to: new PhoneNumber("+1" + message.Destination),
-        //        from: new PhoneNumber("+12023354857"),
-        //        body: message.Body);
+                var smsMessage = MessageResource.Create(
+                    to: new PhoneNumber("+1" + user.PhoneNumber),
+                    from: new PhoneNumber("+12023354857"),
+                    body: "Snow expected, have you planned a shoveler.");
         //}
     }
 }
