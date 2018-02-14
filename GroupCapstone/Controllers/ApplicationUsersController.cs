@@ -10,6 +10,8 @@ using GroupCapstone.Models;
 using Microsoft.AspNet.Identity;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Threading;
+using GroupCapstone.HelperClasses;
 
 namespace GroupCapstone.Controllers
 {
@@ -20,39 +22,27 @@ namespace GroupCapstone.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-            
-            foreach (ApplicationUser model in db.Users)
-            {
-                //if (a.Shovelee == true)
-                //{
-                    string address = model.Address;
-                    string requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
 
-                    WebRequest request = WebRequest.Create(requestUri);
-                    WebResponse response = request.GetResponse();
-                    XDocument xdoc = XDocument.Load(response.GetResponseStream());
+            //foreach (ApplicationUser model in db.Users)
+            //{
+            //    string address = model.Address;
+            //    string requestUri = "https://maps.googleapis.com/maps/api/geocode/xml?key=AIzaSyC4ALH2fGv4h1UC3bN0y8QgmOJCEhop7K8&address=" + Uri.EscapeDataString(address);
 
-                    XElement result = xdoc.Element("GeocodeResponse").Element("result");
-                try
-                {
-                    XElement locationElement = result.Element("geometry").Element("location");
-                    XElement lat = locationElement.Element("lat");
-                    XElement lng = locationElement.Element("lng");
-                    string newLat = lat.Value.ToString();
-                    string newLng = lng.Value.ToString();
-                    model.Latitude = newLat;
-                    model.Longitude = newLng;
-                }
-                catch
-                {
-                    return RedirectToAction("UserHome", "ApplicationUsers");
-                }
-                    //a.location.Add(a.Latitude);
-                    //a.location.Add(a.Longitude);
+            //    WebRequest request = WebRequest.Create(requestUri);
+            //    WebResponse response = request.GetResponse();
+            //    XDocument xdoc = XDocument.Load(response.GetResponseStream());
 
-                // }
-            }
-            db.SaveChanges();
+            //    XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            //    XElement locationElement = result.Element("geometry").Element("location");
+            //    XElement lat = locationElement.Element("lat");
+            //    XElement lng = locationElement.Element("lng");
+            //    string newLat = lat.Value.ToString();
+            //    string newLng = lng.Value.ToString();
+            //    model.Latitude = newLat;
+            //    model.Longitude = newLng;
+
+            //}
+            //db.SaveChanges();
             return View(db.Users.ToList());
         }
 
@@ -74,6 +64,7 @@ namespace GroupCapstone.Controllers
         // GET: ApplicationUsers/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -82,8 +73,9 @@ namespace GroupCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Latitude,Longitude")] ApplicationUser applicationUser)
         {
+
             if (ModelState.IsValid)
             {
                 db.Users.Add(applicationUser);

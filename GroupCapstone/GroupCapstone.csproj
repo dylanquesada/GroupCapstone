@@ -220,10 +220,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\AddytoLatLong.cs" />
     <Compile Include="HelperClasses\KeyReader.cs" />
-    <Compile Include="Migrations\201802132044038_added longitude and latitude.cs" />
-    <Compile Include="Migrations\201802132044038_added longitude and latitude.Designer.cs">
-      <DependentUpon>201802132044038_added longitude and latitude.cs</DependentUpon>
+    <Compile Include="Migrations\201802141716406_init.cs" />
+    <Compile Include="Migrations\201802141716406_init.Designer.cs">
+      <DependentUpon>201802141716406_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -313,8 +314,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802132044038_added longitude and latitude.resx">
-      <DependentUpon>201802132044038_added longitude and latitude.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802141716406_init.resx">
+      <DependentUpon>201802141716406_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
