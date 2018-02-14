@@ -41,8 +41,6 @@ namespace GroupCapstone.Controllers
                     string newLat = lat.Value.ToString();
                     string newLng = lng.Value.ToString();
 
-                    a.Latitude = newLat;
-                    a.Longitude = newLng;
                     model.Latitude = newLat;
                     model.Longitude = newLng;
                 }
