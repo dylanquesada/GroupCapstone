@@ -30,7 +30,7 @@ namespace GroupCapstone.Models
 
         public string Longitude { get; set; }
 
-        List<string> location = new List<string>();
+        public List<string> location { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
