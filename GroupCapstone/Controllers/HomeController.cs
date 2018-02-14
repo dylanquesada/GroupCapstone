@@ -10,6 +10,7 @@ namespace GroupCapstone.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
 

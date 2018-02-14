@@ -42,6 +42,7 @@ namespace GroupCapstone.Controllers
                     a.Longitude = newLng;
                     location.Add(a.Latitude);
                     location.Add(a.Longitude);
+                db.SaveChanges();
                
 
                     

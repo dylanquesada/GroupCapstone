@@ -54,6 +54,9 @@ namespace GroupCapstone.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            HelperClasses.WeatherConnection weather = new HelperClasses.WeatherConnection();
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            weather.GetWeather(user);
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

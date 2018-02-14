@@ -233,20 +233,11 @@
     <Compile Include="HelperClasses\APIKeys.cs" />
     <Compile Include="HelperClasses\APIKeysLocal.cs" />
     <Compile Include="HelperClasses\KeyReader.cs" />
-
     <Compile Include="HelperClasses\Timer.cs" />
     <Compile Include="HelperClasses\WeatherConnection.cs" />
-    <Compile Include="Migrations\201802131403118_init.cs" />
-    <Compile Include="Migrations\201802131403118_init.Designer.cs">
-      <DependentUpon>201802131403118_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802131511013_add price.cs" />
-    <Compile Include="Migrations\201802131511013_add price.Designer.cs">
-      <DependentUpon>201802131511013_add price.cs</DependentUpon>
-    <Compile Include="Migrations\201802132044038_added longitude and latitude.cs" />
-    <Compile Include="Migrations\201802132044038_added longitude and latitude.Designer.cs">
-      <DependentUpon>201802132044038_added longitude and latitude.cs</DependentUpon>
-
+    <Compile Include="Migrations\201802141430475_init.cs" />
+    <Compile Include="Migrations\201802141430475_init.Designer.cs">
+      <DependentUpon>201802141430475_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -336,8 +327,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802132044038_added longitude and latitude.resx">
-      <DependentUpon>201802132044038_added longitude and latitude.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802141430475_init.resx">
+      <DependentUpon>201802141430475_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

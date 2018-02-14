@@ -1,4 +1,5 @@
 ﻿using GroupCapstone.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,33 +14,35 @@ namespace GroupCapstone.HelperClasses
 {
     public class WeatherConnection
     {
-        public bool StormComing(ApplicationUser User)
-        {
-            var API = new 
-        }
-        public var GetWeather(ApplicationUser user)
+        //public bool StormComing(ApplicationUser User)
+        //{
+        //     API = new GetWeather();
+        //}
+        public void GetWeather(ApplicationUser user)
         {
             string url = "https://api.darksky.net/forecast" +
                 HelperClasses.APIKeys.DarkSkyKey +
                 "/" +
-                user.Lat +
+                user.Latitude+
                 "," +
-                user.Lng;
+                user.Longitude;
             var client = new WebClient();
-            return client.DownloadString(url);
+            url = client.DownloadString(url);
+            dynamic data = JsonConvert.DeserializeObject(url);
+            
         }
-        public void SendNotification(ApplicationUser user)
-        {
-            var accountSid = HelperClasses.APIKeys.TwilioKey;
-            // Your Auth Token from twilio.com/console
-            var authToken = HelperClasses.APIKeys.TwilioAuthToken;
+        //public void SendNotification(ApplicationUser user)
+        //{
+        //    var accountSid = HelperClasses.APIKeys.TwilioKey;
+        //    // Your Auth Token from twilio.com/console
+        //    var authToken = HelperClasses.APIKeys.TwilioAuthToken;
 
-            TwilioClient.Init(accountSid, authToken);
+        //    TwilioClient.Init(accountSid, authToken);
 
-            var smsMessage = MessageResource.Create(
-                to: new PhoneNumber("+1" + message.Destination),
-                from: new PhoneNumber("+12023354857"),
-                body: message.Body);
-        }
+        //    var smsMessage = MessageResource.Create(
+        //        to: new PhoneNumber("+1" + message.Destination),
+        //        from: new PhoneNumber("+12023354857"),
+        //        body: message.Body);
+        //}
     }
 }
