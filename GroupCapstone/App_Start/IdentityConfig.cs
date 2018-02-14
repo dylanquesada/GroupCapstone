@@ -29,19 +29,19 @@ namespace GroupCapstone
     public class SmsService : IIdentityMessageService
     {
         public Task SendAsync(IdentityMessage message)
-        {
-            //// Plug in your SMS service here to send a text message.
-            //// Your Account SID from twilio.com/console
-            //var accountSid = /ApiKey.JSON;
-            //// Your Auth Token from twilio.com/console
-            //var authToken = "dcedf53df571669f837b8ef5fdeef40e";
+        {            
+            // Plug in your SMS service here to send a text message.
+            // Your Account SID from twilio.com/console
+            var accountSid = HelperClasses.APIKeys.TwilioKey;
+            // Your Auth Token from twilio.com/console
+            var authToken = HelperClasses.APIKeys.TwilioAuthToken;
 
-            //TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(accountSid, authToken);
 
-            //var smsMessage = MessageResource.Create(
-            //    to: new PhoneNumber("+1" + message.Destination),
-            //    from: new PhoneNumber("+13126354857"),
-            //    body: message.Body);
+            var smsMessage = MessageResource.Create(
+                to: new PhoneNumber("+1" + message.Destination),
+                from: new PhoneNumber("+12023354857"),
+                body: message.Body);
             return Task.FromResult(0);
         }
     }
