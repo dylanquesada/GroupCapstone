@@ -9,6 +9,7 @@ namespace GroupCapstone.HelperClasses
     {
         public static readonly string TwilioKey = "";
         public static readonly string TwilioAuthToken = "";
-        
+        public static readonly string StripeKey = "";
+        public static readonly string DarkSkyKey = "";
     }
 }
