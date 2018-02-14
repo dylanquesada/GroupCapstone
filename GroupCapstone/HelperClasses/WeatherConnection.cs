@@ -18,9 +18,9 @@ namespace GroupCapstone.HelperClasses
         //{
         //     API = new GetWeather();
         //}
-        public void GetWeather(ApplicationUser user)
+        public dynamic GetWeather(ApplicationUser user)
         {
-            string url = "https://api.darksky.net/forecast" +
+            string url = "https://api.darksky.net/forecast/" +
                 HelperClasses.APIKeys.DarkSkyKey +
                 "/" +
                 user.Latitude+
@@ -29,7 +29,7 @@ namespace GroupCapstone.HelperClasses
             var client = new WebClient();
             url = client.DownloadString(url);
             dynamic data = JsonConvert.DeserializeObject(url);
-            
+            return data;
         }
         //public void SendNotification(ApplicationUser user)
         //{
