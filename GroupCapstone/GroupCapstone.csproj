@@ -93,8 +93,8 @@
       <HintPath>..\packages\Quartz.3.0.2\lib\net452\Quartz.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Stripe.net, Version=12.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Stripe.net.12.1.0\lib\net45\Stripe.net.dll</HintPath>
+    <Reference Include="Stripe.net, Version=13.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.13.0.0\lib\net45\Stripe.net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -314,6 +314,7 @@
     <Content Include="Views\ApplicationUsers\Customer.cshtml" />
     <Content Include="Views\ApplicationUsers\Worker.cshtml" />
     <Content Include="Views\ApplicationUsers\UserHome.cshtml" />
+    <Content Include="Views\Home\Charge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

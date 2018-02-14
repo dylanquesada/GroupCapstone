@@ -10,6 +10,7 @@ using GroupCapstone.Models;
 using Microsoft.AspNet.Identity;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace GroupCapstone.Controllers
 {
@@ -167,6 +168,10 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
+
+            var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
+            ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
+
             return View(result.FirstOrDefault());
         }
 
@@ -202,6 +207,9 @@ namespace GroupCapstone.Controllers
         //    }
         //    return View("Index", "ApplicationUsers");
         //}
+
+
+
 
     }
 }
