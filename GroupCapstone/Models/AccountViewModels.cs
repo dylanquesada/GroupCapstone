@@ -128,10 +128,23 @@ namespace GroupCapstone.Models
 
     public class FindJobViewModel
     {
-        [Display(Name = "Charge")]
+        [Display(Name = "Minnimum Charge")]
         [DataType(DataType.Currency)]
         public decimal PricePoint { get; set; }
         [Display(Name = "Max Travel Distance (in Miles)")]
         public int Distance { get; set; }
+    }
+
+    public class CustomerViewModel
+    {
+        [Display(Name = "Description")]
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
+
+        [Display(Name = "Price")]
+        public decimal Price { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
     }
 }

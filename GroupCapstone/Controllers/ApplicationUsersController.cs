@@ -133,24 +133,40 @@ namespace GroupCapstone.Controllers
             }
             base.Dispose(disposing);
         }
-
-        public ActionResult Customer()
+        public ActionResult Customer(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Customer([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude")] ApplicationUser applicationuser)
         {
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-<<<<<<< HEAD
-            var changeBool = result.FirstOrDefault();
-            changeBool.Shovelee = true;
-            //lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
-            db.SaveChanges();
-=======
-
+            //var changeBool = result.FirstOrDefault();
+            //changeBool.Shovelee = true;
+            ////lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
+            //db.Entry(result.FirstOrDefault()).State = EntityState.Modified;
+            //db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Entry(applicationuser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
             var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
             ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
-
->>>>>>> d2466ee19bd15af469098a400e398e39a70fe2ad
-            return View(result.FirstOrDefault());
+            return View();
         }
 
         public ActionResult Worker()
@@ -165,7 +181,9 @@ namespace GroupCapstone.Controllers
 
         public ActionResult UserHome()
         {
-            return View();
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            return View(result.FirstOrDefault());
         }
 
         public ActionResult WorkIndex()

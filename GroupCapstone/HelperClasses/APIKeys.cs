@@ -12,8 +12,6 @@ namespace GroupCapstone.HelperClasses
         public static readonly string StripePublishableKey = "";
         public static readonly string StripeSecretKey = "";
         public static readonly string DarkSkyKey = "";
-        public static readonly string StripePublishableKey = "";
-        public static readonly string StripeSecretKey = "";
 
     }
 }
