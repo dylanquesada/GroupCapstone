@@ -230,14 +230,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\AddytoLatLong.cs" />
     <Compile Include="HelperClasses\APIKeys.cs" />
     <Compile Include="HelperClasses\APIKeysLocal.cs" />
     <Compile Include="HelperClasses\KeyReader.cs" />
     <Compile Include="HelperClasses\Timer.cs" />
     <Compile Include="HelperClasses\WeatherConnection.cs" />
-    <Compile Include="Migrations\201802141430475_init.cs" />
-    <Compile Include="Migrations\201802141430475_init.Designer.cs">
-      <DependentUpon>201802141430475_init.cs</DependentUpon>
+    <Compile Include="Migrations\201802142125105_inti.cs" />
+    <Compile Include="Migrations\201802142125105_inti.Designer.cs">
+      <DependentUpon>201802142125105_inti.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -315,6 +316,7 @@
     <Content Include="Views\ApplicationUsers\Worker.cshtml" />
     <Content Include="Views\ApplicationUsers\UserHome.cshtml" />
     <Content Include="Views\Home\Charge.cshtml" />
+    <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,8 +330,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802141430475_init.resx">
-      <DependentUpon>201802141430475_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802142125105_inti.resx">
+      <DependentUpon>201802142125105_inti.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

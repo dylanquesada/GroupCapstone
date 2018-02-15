@@ -150,7 +150,15 @@ namespace GroupCapstone.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public ActionResult Worker(FindJobViewModel model)
+        {
+            return RedirectToAction("WorkIndex", "ApplicationUsers", model);
+        }
+        public ActionResult WorkIndex(FindJobViewModel model)
+        {
+            return View(model);
+        }
         public ActionResult UserHome()
         {
             return View();
