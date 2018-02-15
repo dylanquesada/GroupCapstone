@@ -155,10 +155,11 @@ namespace GroupCapstone.Controllers
             {
                 AddytoLatLong convert = new AddytoLatLong();
                 var ltln = convert.GetLatLng(model.Address);
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, FirstName = model.FirstName, LastName = model.LastName, Latitude = ltln[0], Longitude = ltln[1]};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, FirstName = model.FirstName, LastName = model.LastName, Latitude = ltln[0], Longitude = ltln[1], Shovelee = false};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                     db.SaveChanges();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

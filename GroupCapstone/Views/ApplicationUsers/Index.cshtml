@@ -33,6 +33,12 @@
         <th>
             @Html.DisplayNameFor(model => model[0].PhoneNumber)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Price)
+        </th>
         <th></th>
     </tr>
 
@@ -56,6 +62,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.PhoneNumber)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+
     </tr>
 
 
@@ -69,21 +82,23 @@
     function initMap() {
         var user = @Html.Raw(Json.Encode(Model));
         map = new google.maps.Map(document.getElementById('map'), {
-           zoom: 4,
-           center: new google.maps.LatLng(10,-87.3),
-           mapTypeId: 'terrain'
+            zoom: 4,
+            center: new google.maps.LatLng(10,-87.3),
+            mapTypeId: 'terrain'
         });
         for (i = 0; i < user.length; i++) {
-            var myLatLng = new google.maps.LatLng(user[i]['Latitude'], user[i]['Longitude'])
+            if(user[i]['Shovelee'] == false){
+                var myLatLng = new google.maps.LatLng(user[i]['Latitude'], user[i]['Longitude'])
             
-            var marker = new google.maps.Marker({
-                position: myLatLng,
-                map: map
-            });
-            map.center = myLatLng;
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map
+                });
+                map.center = myLatLng;
+            }
         }
     }
-
+    
 </script>
 
 @*<script type="text/javascript">

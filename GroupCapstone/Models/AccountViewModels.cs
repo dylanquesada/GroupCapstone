@@ -125,6 +125,8 @@ namespace GroupCapstone.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
+
     public class FindJobViewModel
     {
         [Display(Name = "Charge")]
