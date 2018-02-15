@@ -38,18 +38,18 @@ namespace GroupCapstone.HelperClasses
             dynamic data = JsonConvert.DeserializeObject(url);
             return data;
         }
-        //public void SendNotification(ApplicationUser user)
-        //{
-        //     var accountSid = HelperClasses.APIKeys.TwilioKey;
+        public void SendNotification(ApplicationUser user)
+        {
+             var accountSid = HelperClasses.APIKeys.TwilioKey;
         // Your Auth Token from twilio.com/console
-        var authToken = HelperClasses.APIKeys.TwilioAuthToken;
+             var authToken = HelperClasses.APIKeys.TwilioAuthToken;
 
-        TwilioClient.Init(accountSid, authToken);
+            TwilioClient.Init(accountSid, authToken);
 
                 var smsMessage = MessageResource.Create(
                     to: new PhoneNumber("+1" + user.PhoneNumber),
                     from: new PhoneNumber("+12023354857"),
                     body: "Snow expected, have you planned a shoveler.");
-        //}
+        }
     }
 }

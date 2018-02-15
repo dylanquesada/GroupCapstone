@@ -230,14 +230,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\AddytoLatLong.cs" />
+    <Compile Include="HelperClasses\APIKeyLocal.cs" />
     <Compile Include="HelperClasses\APIKeys.cs" />
-    <Compile Include="HelperClasses\APIKeysLocal.cs" />
     <Compile Include="HelperClasses\KeyReader.cs" />
     <Compile Include="HelperClasses\Timer.cs" />
     <Compile Include="HelperClasses\WeatherConnection.cs" />
-    <Compile Include="Migrations\201802141430475_init.cs" />
-    <Compile Include="Migrations\201802141430475_init.Designer.cs">
-      <DependentUpon>201802141430475_init.cs</DependentUpon>
+    <Compile Include="Migrations\201802142124525_init.cs" />
+    <Compile Include="Migrations\201802142124525_init.Designer.cs">
+      <DependentUpon>201802142124525_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151507036_added findjobviewmodel.cs" />
+    <Compile Include="Migrations\201802151507036_added findjobviewmodel.Designer.cs">
+      <DependentUpon>201802151507036_added findjobviewmodel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -314,6 +319,8 @@
     <Content Include="Views\ApplicationUsers\Customer.cshtml" />
     <Content Include="Views\ApplicationUsers\Worker.cshtml" />
     <Content Include="Views\ApplicationUsers\UserHome.cshtml" />
+    <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
+    <Content Include="Views\ApplicationUsers\Pick.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -327,8 +334,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802141430475_init.resx">
-      <DependentUpon>201802141430475_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802142124525_init.resx">
+      <DependentUpon>201802142124525_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151507036_added findjobviewmodel.resx">
+      <DependentUpon>201802151507036_added findjobviewmodel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

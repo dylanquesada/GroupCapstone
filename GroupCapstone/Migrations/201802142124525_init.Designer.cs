@@ -13,7 +13,7 @@ namespace GroupCapstone.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201802141716406_init"; }
+            get { return "201802142124525_init"; }
         }
         
         string IMigrationMetadata.Source

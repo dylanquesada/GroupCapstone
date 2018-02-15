@@ -19,6 +19,7 @@ namespace GroupCapstone.Models
         public string LastName { get; set; }
 
         public int Rating { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
@@ -29,8 +30,6 @@ namespace GroupCapstone.Models
         public string Latitude { get; set; }
 
         public string Longitude { get; set; }
-
-        public List<string> location { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

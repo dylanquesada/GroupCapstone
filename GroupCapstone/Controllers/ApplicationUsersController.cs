@@ -22,65 +22,6 @@ namespace GroupCapstone.Controllers
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-<<<<<<< HEAD
-
-            //foreach (ApplicationUser model in db.Users)
-            //{
-            //    string address = model.Address;
-            //    string requestUri = "https://maps.googleapis.com/maps/api/geocode/xml?key=AIzaSyC4ALH2fGv4h1UC3bN0y8QgmOJCEhop7K8&address=" + Uri.EscapeDataString(address);
-
-            //    WebRequest request = WebRequest.Create(requestUri);
-            //    WebResponse response = request.GetResponse();
-            //    XDocument xdoc = XDocument.Load(response.GetResponseStream());
-
-            //    XElement result = xdoc.Element("GeocodeResponse").Element("result");
-            //    XElement locationElement = result.Element("geometry").Element("location");
-            //    XElement lat = locationElement.Element("lat");
-            //    XElement lng = locationElement.Element("lng");
-            //    string newLat = lat.Value.ToString();
-            //    string newLng = lng.Value.ToString();
-            //    model.Latitude = newLat;
-            //    model.Longitude = newLng;
-
-            //}
-            //db.SaveChanges();
-=======
-            
-            foreach (ApplicationUser model in db.Users)
-            {
-                //if (a.Shovelee == true)
-                //{
-                    string address = model.Address;
-                    string requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false", Uri.EscapeDataString(address));
-
-                    WebRequest request = WebRequest.Create(requestUri);
-                    WebResponse response = request.GetResponse();
-                    XDocument xdoc = XDocument.Load(response.GetResponseStream());
-
-                    XElement result = xdoc.Element("GeocodeResponse").Element("result");
-                try
-                {
-                    XElement locationElement = result.Element("geometry").Element("location");
-                    XElement lat = locationElement.Element("lat");
-                    XElement lng = locationElement.Element("lng");
-                    string newLat = lat.Value.ToString();
-                    string newLng = lng.Value.ToString();
-
-                    model.Latitude = newLat;
-                    model.Longitude = newLng;
-                }
-                catch
-                {
-                    return RedirectToAction("UserHome", "ApplicationUsers");
-                }
-                    //a.location.Add(a.Latitude);
-                    //a.location.Add(a.Longitude);
-
-
-                // }
-            }
-            db.SaveChanges();
->>>>>>> 27a7ba2e518cbb5c497c406209df36834b1b7d0b
             return View(db.Users.ToList());
         }
 
@@ -195,16 +136,37 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
+            var changeBool = result.FirstOrDefault();
+            changeBool.Shovelee = true;
+            //lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
+            db.SaveChanges();
             return View(result.FirstOrDefault());
         }
 
         public ActionResult Worker()
         {
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var changeBool = result.FirstOrDefault();
+            changeBool.Shovelee = false;
+            db.SaveChanges();
             return View();
         }
 
         public ActionResult UserHome()
         {
+            return View();
+        }
+
+        public ActionResult WorkIndex()
+        {
+
+            return View(db.Users.ToList());
+        }
+
+        public ActionResult Pick()
+        {
+
             return View();
         }
 

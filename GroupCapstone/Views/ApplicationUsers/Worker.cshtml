@@ -1,7 +1,29 @@
-﻿
+﻿@model GroupCapstone.Models.FindJobViewModel
 @{
     ViewBag.Title = "Worker";
 }
-
-<h2>Worker</h2>
+<h2>Let's get 5hovlin'</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(m => m.PricePoint, new { @class = "col-md-12 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.PricePoint, new { @class = "form-control" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            @Html.LabelFor(m => m.Distance, new { @class = "col-md-12 control-label" })
+            <div class="col-md-4">
+                @Html.TextBoxFor(m => m.Distance, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="button" value="Find" onclick="location.href='@Url.Action("WorkIndex", "ApplicationUsers")'" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
 
