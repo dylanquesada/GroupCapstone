@@ -139,17 +139,15 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-<<<<<<< HEAD
             var changeBool = result.FirstOrDefault();
             changeBool.Shovelee = true;
             //lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
             db.SaveChanges();
-=======
+
 
             var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
             ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
 
->>>>>>> d2466ee19bd15af469098a400e398e39a70fe2ad
             return View(result.FirstOrDefault());
         }
 
