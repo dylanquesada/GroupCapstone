@@ -17,6 +17,6 @@
     </div>
     <div class="col-md-6">
         <h2>Go Shovel</h2>
-        <input type="button" value="Request" onclick="location.href='@Url.Action("Worker", "ApplicationUsers")'" class="btn btn-default" />
+        <input type="button" value="Request" onclick="location.href='@Url.Action("Worker", "ApplicationUsers", new { id = Model.Id })'" class="btn btn-default" />
     </div>
 </div>

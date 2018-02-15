@@ -126,16 +126,13 @@ namespace GroupCapstone.Models
         public string Email { get; set; }
     }
 
-
     public class FindJobViewModel
     {
-        [Display(Name = "Minimum Charge")]
+        [Display(Name = "Minnimum Charge")]
         [DataType(DataType.Currency)]
         public decimal PricePoint { get; set; }
         [Display(Name = "Max Travel Distance (in Miles)")]
         public int Distance { get; set; }
-
     }
 
-   
 }

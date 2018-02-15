@@ -88,7 +88,7 @@ namespace GroupCapstone.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude,PricePoint,Distance")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
@@ -153,18 +153,6 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-<<<<<<< HEAD
-            var changeBool = result.FirstOrDefault();
-            changeBool.Shovelee = true;
-            //lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
-            db.SaveChanges();
-
-
-            var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
-            ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
-
-            return View(result.FirstOrDefault());
-=======
             //var changeBool = result.FirstOrDefault();
             //changeBool.Shovelee = true;
             ////lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
@@ -179,26 +167,40 @@ namespace GroupCapstone.Controllers
             var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
             ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
             return View();
->>>>>>> 86ded18d61fc8ee2417ee44c25566152b5a7b974
         }
 
-        public ActionResult Worker()
+        public ActionResult Worker(string id)
         {
-            string sameUser = User.Identity.GetUserId();
-            var result = from row in db.Users where row.Id == sameUser select row;
-            var changeBool = result.FirstOrDefault();
-            changeBool.Shovelee = false;
-            db.SaveChanges();
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
         }
         [HttpPost]
-        public ActionResult Worker(FindJobViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Worker([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude,PricePoint,Distance")] ApplicationUser applicationuser)
         {
-            return RedirectToAction("WorkIndex", "ApplicationUsers", model);
-        }
-        public ActionResult WorkIndex(FindJobViewModel model)
-        {
-            return View(model);
+            //find pickup pass in to view
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            //var changeBool = result.FirstOrDefault();
+            //changeBool.Shovelee = true;
+            ////lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
+            //db.Entry(result.FirstOrDefault()).State = EntityState.Modified;
+            //db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.Entry(applicationuser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("WorkIndex", "ApplicationUsers");
+            }
+            return RedirectToAction("WorkIndex", "ApplicationUsers");
         }
         public ActionResult UserHome()
         {
@@ -209,15 +211,26 @@ namespace GroupCapstone.Controllers
 
         public ActionResult WorkIndex()
         {
-
-            return View(db.Users.ToList());
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            List<ApplicationUser> list = new List<ApplicationUser>();
+            list = db.Users.ToList();
+            GoogleDistanceMatrix theMatrix = new GoogleDistanceMatrix();
+            foreach (ApplicationUser user in list)
+            {
+                if (resultToUser.Id == user.Id)
+                {
+                    list.Remove(user);
+                }
+                if (theMatrix.GetDistance(user.Latitude, user.Longitude, resultToUser.Latitude, resultToUser.Longitude) < resultToUser.Distance)
+                {
+                    list.Remove(user);
+                }
+            }
+            return View(list);
         }
 
-        public ActionResult Pick()
-        {
-
-            return View();
-        }
 
         //public ActionResult GetZipMap()
         //{

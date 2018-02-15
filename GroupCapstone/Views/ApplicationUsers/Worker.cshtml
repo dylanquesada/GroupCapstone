@@ -1,4 +1,4 @@
-﻿@model GroupCapstone.Models.FindJobViewModel
+﻿@model GroupCapstone.Models.ApplicationUser
 @{
     ViewBag.Title = "Worker";
 }
@@ -6,14 +6,35 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    //Id,Address,Rating,UserName,Address,FirstName,LastName,Rating,Description,Price,Shovelee,Latitude,Longitude
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.FirstName)
+    @Html.HiddenFor(model => model.LastName)
+    @Html.HiddenFor(model => model.Rating)
+    @Html.HiddenFor(model => model.Email)
+    @Html.HiddenFor(model => model.EmailConfirmed)
+    @Html.HiddenFor(model => model.PasswordHash)
+    @Html.HiddenFor(model => model.SecurityStamp)
+    @Html.HiddenFor(model => model.PhoneNumber)
+    @Html.HiddenFor(model => model.PhoneNumberConfirmed)
+    @Html.HiddenFor(model => model.TwoFactorEnabled)
+    @Html.HiddenFor(model => model.LockoutEndDateUtc)
+    @Html.HiddenFor(model => model.LockoutEnabled)
+    @Html.HiddenFor(model => model.AccessFailedCount)
+    @Html.HiddenFor(model => model.UserName)
+    @Html.HiddenFor(model => model.Shovelee)
+    @Html.HiddenFor(model => model.Latitude)
+    @Html.HiddenFor(model => model.Longitude)
+    @Html.HiddenFor(model => model.Description)
+    @Html.HiddenFor(model => model.Price)
+    @Html.HiddenFor(model => model.Address)
     <div class="form-group">
         <div class="form-group">
 
-            @Html.LabelFor(m => m.PricePoint, new { @class = "col-md-12 control-label"})
+            @Html.LabelFor(m => m.PricePoint, new { @class = "col-md-12 control-label" })
             <div class="col-md-4">
-                @Html.TextBoxFor(m => m.PricePoint, new { @class = "form-control"})
-
-
+                @Html.TextBoxFor(m => m.PricePoint, new { @class = "form-control" })
 
             </div>
         </div>
@@ -25,10 +46,8 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-md-12">
-
-                <input type="button" value="Find" onclick="location.href='@Url.Action("WorkIndex", "ApplicationUsers")'" class="btn btn-default" />
-
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default"  />
             </div>
         </div>
     </div>

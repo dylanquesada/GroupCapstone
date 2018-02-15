@@ -239,14 +239,19 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="HelperClasses\AddytoLatLong.cs" />
+    <Compile Include="HelperClasses\APIKeyLocal.cs" />
     <Compile Include="HelperClasses\APIKeys.cs" />
-    <Compile Include="HelperClasses\APIKeysLocal.cs" />
+    <Compile Include="HelperClasses\GoogleDistanceMatrix.cs" />
     <Compile Include="HelperClasses\KeyReader.cs" />
     <Compile Include="HelperClasses\Message.cs" />
     <Compile Include="HelperClasses\Timer.cs" />
     <Compile Include="HelperClasses\Twilio.cs" />
     <Compile Include="HelperClasses\WeatherConnection.cs" />
     <Compile Include="HelperClasses\JobScheduler.cs" />
+    <Compile Include="Migrations\201802152211469_added another two variables.cs" />
+    <Compile Include="Migrations\201802152211469_added another two variables.Designer.cs">
+      <DependentUpon>201802152211469_added another two variables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -258,7 +263,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="HelperClasses\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
@@ -326,20 +331,24 @@
     <Content Include="Views\ApplicationUsers\Worker.cshtml" />
     <Content Include="Views\ApplicationUsers\UserHome.cshtml" />
     <Content Include="Views\Home\Charge.cshtml" />
-    <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
-    <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
     <Content Include="Views\ApplicationUsers\Pick.cshtml" />
+    <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="HelperClasses\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="HelperClasses\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="HelperClasses\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802152211469_added another two variables.resx">
+      <DependentUpon>201802152211469_added another two variables.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
