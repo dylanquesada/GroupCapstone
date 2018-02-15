@@ -50,13 +50,13 @@ namespace GroupCapstone.HelperClasses
         }
         public void SendSnowtification(ApplicationUser user)
         {
+
             Message message = new Message();
             message.content = "Snow expected, have you planned a shoveler.";
             message.recipient = user.PhoneNumber;
             Twilio twilio = new Twilio();
             twilio.Send(message);
         }
-
 
 
         public void Execute(IJobExecutionContext context)
