@@ -19,7 +19,7 @@ namespace GroupCapstone.HelperClasses
             var data = GetWeather(user);
             int temp = data.daily.precipProb.Convert.ToInt32();
             int precipProb = data.daily.temperatureLow.Convert.ToInt32();
-            if (temp >= .5 && precipProb <= 32)
+            if (precipProb >= .5 && temp <= 32)
             {
                 return true;
             }
@@ -40,6 +40,7 @@ namespace GroupCapstone.HelperClasses
         }
         public void SendNotification(ApplicationUser user)
         {
+<<<<<<< HEAD
              var accountSid = HelperClasses.APIKeys.TwilioKey;
         // Your Auth Token from twilio.com/console
              var authToken = HelperClasses.APIKeys.TwilioAuthToken;
@@ -50,6 +51,18 @@ namespace GroupCapstone.HelperClasses
                     to: new PhoneNumber("+1" + user.PhoneNumber),
                     from: new PhoneNumber("+12023354857"),
                     body: "Snow expected, have you planned a shoveler.");
+=======
+            var accountSid = HelperClasses.APIKeys.TwilioKey;
+            // Your Auth Token from twilio.com/console
+            var authToken = HelperClasses.APIKeys.TwilioAuthToken;
+
+            TwilioClient.Init(accountSid, authToken);
+
+            var smsMessage = MessageResource.Create(
+                to: new PhoneNumber("+1" + user.PhoneNumber),
+                from: new PhoneNumber("+12023354857"),
+                body: "Snow expected, have you planned a shoveler.");
+>>>>>>> d2466ee19bd15af469098a400e398e39a70fe2ad
         }
     }
 }
