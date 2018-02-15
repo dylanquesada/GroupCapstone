@@ -153,11 +153,7 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-            //var changeBool = result.FirstOrDefault();
-            //changeBool.Shovelee = true;
-            ////lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
-            //db.Entry(result.FirstOrDefault()).State = EntityState.Modified;
-            //db.SaveChanges();
+
             if (ModelState.IsValid)
             {
                 db.Entry(applicationuser).State = EntityState.Modified;
