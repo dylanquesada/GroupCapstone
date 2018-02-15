@@ -153,23 +153,7 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-<<<<<<< HEAD
-            var changeBool = result.FirstOrDefault();
-            changeBool.Shovelee = true;
-            //lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
-            db.SaveChanges();
 
-
-            var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
-            ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
-
-            return View(result.FirstOrDefault());
-=======
-            //var changeBool = result.FirstOrDefault();
-            //changeBool.Shovelee = true;
-            ////lbl_PostContent.Text = lbl_PostContent.Text.Replace(vbCrLf, "<br />");
-            //db.Entry(result.FirstOrDefault()).State = EntityState.Modified;
-            //db.SaveChanges();
             if (ModelState.IsValid)
             {
                 db.Entry(applicationuser).State = EntityState.Modified;
@@ -179,7 +163,7 @@ namespace GroupCapstone.Controllers
             var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
             ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
             return View();
->>>>>>> 86ded18d61fc8ee2417ee44c25566152b5a7b974
+
         }
 
         public ActionResult Worker()
