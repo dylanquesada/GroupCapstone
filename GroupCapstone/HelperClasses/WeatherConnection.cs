@@ -52,7 +52,7 @@ namespace GroupCapstone.HelperClasses
         {
 
             Message message = new Message();
-            message.content = "Snow expected, have you planned a shoveler.";
+            message.content = "Snow expected, have you planned a shoveler?";
             message.recipient = user.PhoneNumber;
             Twilio twilio = new Twilio();
             twilio.Send(message);
@@ -70,6 +70,24 @@ namespace GroupCapstone.HelperClasses
                 }
             }
         }
+        public void SendNotification(ApplicationUser user)
+        {
 
+            Message message = new Message();
+            message.content = user.FirstName + " " + user.LastName + "Rating : " + user.Rating + " is on the way to shovel!";
+            message.recipient = user.PhoneNumber;
+            Twilio twilio = new Twilio();
+            twilio.Send(message);
+        }
+
+        public void SendNot(ApplicationUser user)
+        {
+
+            Message message = new Message();
+            message.content = user.FirstName + " " + user.LastName +  " is done with your house! Go online and click the button to rate and pay.";
+            message.recipient = user.PhoneNumber;
+            Twilio twilio = new Twilio();
+            twilio.Send(message);
+        }
     }
 }

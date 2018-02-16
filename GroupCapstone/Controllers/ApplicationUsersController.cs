@@ -10,7 +10,6 @@ using GroupCapstone.Models;
 using Microsoft.AspNet.Identity;
 using System.Xml.Linq;
 using System.Threading.Tasks;
-
 using System.Configuration;
 using System.Threading;
 using GroupCapstone.HelperClasses;
@@ -22,10 +21,15 @@ namespace GroupCapstone.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        public object WeatherConnection { get; private set; }
+
         // GET: ApplicationUsers
         public ActionResult Index()
         {
-            return View(db.Users.ToList());
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+
+            return View(result.FirstOrDefault());
         }
 
         // GET: ApplicationUsers/Details/5
@@ -153,10 +157,11 @@ namespace GroupCapstone.Controllers
             //find pickup pass in to view
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
-
             if (ModelState.IsValid)
             {
                 db.Entry(applicationuser).State = EntityState.Modified;
+                var changeBool = result.FirstOrDefault();
+                changeBool.Shovelee = true;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -207,6 +212,7 @@ namespace GroupCapstone.Controllers
 
         public ActionResult WorkIndex()
         {
+            List<ApplicationUser> newList = new List<ApplicationUser>();
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
             var resultToUser = result.FirstOrDefault();
@@ -215,18 +221,65 @@ namespace GroupCapstone.Controllers
             GoogleDistanceMatrix theMatrix = new GoogleDistanceMatrix();
             foreach (ApplicationUser user in list)
             {
-                if (resultToUser.Id == user.Id)
+
+                if (theMatrix.GetDistance(user.Latitude, user.Longitude, resultToUser.Latitude, resultToUser.Longitude) > resultToUser.Distance)
                 {
-                    list.Remove(user);
-                }
-                if (theMatrix.GetDistance(user.Latitude, user.Longitude, resultToUser.Latitude, resultToUser.Longitude) < resultToUser.Distance)
-                {
-                    list.Remove(user);
+                    newList.Add(user);
                 }
             }
-            return View(list);
+            return View(newList);
         }
 
+        public ActionResult Confirmation()
+        {
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            WeatherConnectionJob connect = new WeatherConnectionJob();
+            connect.SendNotification(resultToUser);
+            return View(resultToUser);
+        }
+
+        public ActionResult Done(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Done([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude,PricePoint,Distance,HomeRating")] ApplicationUser applicationuser)
+        {
+            //find pickup pass in to view
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            if (ModelState.IsValid)
+            {
+                db.Entry(applicationuser).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Home", "ApplicationUsers");
+            }
+            var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
+            ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
+            return View();
+        }
+
+        public ActionResult CustomerConf()
+        {
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            WeatherConnectionJob connect = new WeatherConnectionJob();
+            connect.SendNot(resultToUser);
+            return View(resultToUser);
+        }
 
         //public ActionResult GetZipMap()
         //{

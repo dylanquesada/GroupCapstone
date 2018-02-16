@@ -248,9 +248,13 @@
     <Compile Include="HelperClasses\Twilio.cs" />
     <Compile Include="HelperClasses\WeatherConnection.cs" />
     <Compile Include="HelperClasses\JobScheduler.cs" />
-    <Compile Include="Migrations\201802152211469_added another two variables.cs" />
-    <Compile Include="Migrations\201802152211469_added another two variables.Designer.cs">
-      <DependentUpon>201802152211469_added another two variables.cs</DependentUpon>
+    <Compile Include="Migrations\201802160112336_init.cs" />
+    <Compile Include="Migrations\201802160112336_init.Designer.cs">
+      <DependentUpon>201802160112336_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802160236043_added another rating.cs" />
+    <Compile Include="Migrations\201802160236043_added another rating.Designer.cs">
+      <DependentUpon>201802160236043_added another rating.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -330,9 +334,10 @@
     <Content Include="Views\ApplicationUsers\Customer.cshtml" />
     <Content Include="Views\ApplicationUsers\Worker.cshtml" />
     <Content Include="Views\ApplicationUsers\UserHome.cshtml" />
-    <Content Include="Views\Home\Charge.cshtml" />
-    <Content Include="Views\ApplicationUsers\Pick.cshtml" />
     <Content Include="Views\ApplicationUsers\WorkIndex.cshtml" />
+    <Content Include="Views\ApplicationUsers\Confirmation.cshtml" />
+    <Content Include="Views\ApplicationUsers\Done.cshtml" />
+    <Content Include="Views\ApplicationUsers\CustomerConf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -346,8 +351,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802152211469_added another two variables.resx">
-      <DependentUpon>201802152211469_added another two variables.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802160112336_init.resx">
+      <DependentUpon>201802160112336_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802160236043_added another rating.resx">
+      <DependentUpon>201802160236043_added another rating.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

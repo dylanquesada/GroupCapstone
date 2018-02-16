@@ -25,7 +25,7 @@ namespace GroupCapstone.HelperClasses
         public void Send(Message message)
         {
             var smsMessage = MessageResource.Create(
-                to: new PhoneNumber("+1" + message.recipient),
+                to: new PhoneNumber("14142178834"),
                 from: new PhoneNumber("+12023354857"),
                 body: message.content);
         }
