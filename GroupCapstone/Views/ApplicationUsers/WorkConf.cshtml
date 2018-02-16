@@ -1,0 +1,11 @@
+﻿@model GroupCapstone.Models.ApplicationUser
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>Confirmation</h2>
+
+<h1>Are you done yet?</h1>
+<p> Click the button when the job is done!</p>
+
+<input type="button" value="Done" onclick="location.href='@Url.Action("HomeRate", "ApplicationUsers", new { id = Model.Id })'" class="btn btn-default" />

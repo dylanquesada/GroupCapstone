@@ -1,0 +1,10 @@
+﻿@model GroupCapstone.Models.ApplicationUser
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<h2>The message has been sent that you are done!</h2>
+
+<p> You should recieve a payment shortly</p>
+
+<input type="button" value="Back To Home" onclick="location.href='@Url.Action("UserHome", "ApplicationUsers", new { id = Model.Id })'" class="btn btn-default" />

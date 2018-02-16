@@ -74,7 +74,7 @@ namespace GroupCapstone.HelperClasses
         {
 
             Message message = new Message();
-            message.content = user.FirstName + " " + user.LastName + "Rating : " + user.Rating + " is on the way to shovel!";
+            message.content = user.FirstName + " " + user.LastName + "Rating: " + user.Rating + " is on the way to shovel!";
             message.recipient = user.PhoneNumber;
             Twilio twilio = new Twilio();
             twilio.Send(message);

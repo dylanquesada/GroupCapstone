@@ -27,7 +27,9 @@ namespace GroupCapstone.HelperClasses
             var client = new WebClient();
             url = client.DownloadString(url);
             dynamic data = JsonConvert.DeserializeObject(url);
-            int dist = data.rows[0].elements[0].distance.value;
+
+
+            int dist = data.rows[0].elements[0].distance.value / 1609.344;
             return dist;
         }
     }

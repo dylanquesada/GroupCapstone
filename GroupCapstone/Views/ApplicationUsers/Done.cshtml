@@ -3,25 +3,13 @@
     ViewBag.Title = "Done";
 }
 
-<h2>How did @Model.FirstName do?</h2>
+<h2>How did they do?</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <form action="/Payment/Charge" method="POST">
-        <article>
-            <label>Amount: @Model.Price</label>
-        </article>
-        <script src="//checkout.stripe.com/v2/checkout.js"
-                class="stripe-button"
-                data-key="@ViewBag.StripePublishKey"
-                data-locale="auto"
-                data-description="Sample Charge"
-                data-amount= @Model.Price * 100 >
-        </script>
-    </form>
-   
-    //Id,Address,Rating,UserName,Address,FirstName,LastName,Rating,Description,Price,Shovelee,Latitude,Longitude
+    <div class= "form-horizontal">
+    @*//Id,Address,Rating,UserName,Address,FirstName,LastName,Rating,Description,Price,Shovelee,Latitude,Longitude*@
     @Html.HiddenFor(model => model.Id)
     @Html.HiddenFor(model => model.FirstName)
     @Html.HiddenFor(model => model.LastName)
@@ -46,18 +34,34 @@
     @Html.HiddenFor(model => model.Distance)
     @Html.HiddenFor(model => model.HomeRating)
 
- @Html.DropDownListFor(m => m.Rating, new List<SelectListItem>
-    {
-                        new SelectListItem() {Text = "1", Value="1"},
-                        new SelectListItem() {Text = "2", Value="2"},
-                        new SelectListItem() {Text = "3", Value="3"},
-                        new SelectListItem() {Text = "4", Value="4"},
-                        new SelectListItem() {Text = "5", Value="5"}
-    })
-}
-
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+        @Html.LabelFor(m => m.Rating, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Rating, new { @class = "form-control" })
         </div>
     </div>
+    <br />
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<form action="/Payment/Charge" method="POST">
+    <article>
+        <label>Amount: @Model.Price</label>
+    </article>
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@ViewBag.StripePublishKey"
+            data-locale="auto"
+            data-description="Sample Charge"
+            data-amount=(@Model.Price * 10000)>
+    </script>
+</form>

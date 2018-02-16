@@ -428,6 +428,20 @@ namespace GroupCapstone.Controllers
             base.Dispose(disposing);
         }
 
+
+        public ActionResult SendSnowtification()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            Message message = new Message();
+            message.content = "Snow expected, have you planned a shoveler.";
+            message.recipient = user.PhoneNumber;
+            WeatherConnectionJob wj = new WeatherConnectionJob();
+            wj.SendSnowtification(user);
+            return View();
+        }
+
+
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

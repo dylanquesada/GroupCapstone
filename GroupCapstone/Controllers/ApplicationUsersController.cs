@@ -40,6 +40,12 @@ namespace GroupCapstone.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             ApplicationUser applicationUser = db.Users.Find(id);
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            resultToUser.OtherId = id;
+            applicationUser.OtherId = resultToUser.Id;
+            db.SaveChanges();
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -222,7 +228,7 @@ namespace GroupCapstone.Controllers
             foreach (ApplicationUser user in list)
             {
 
-                if (theMatrix.GetDistance(user.Latitude, user.Longitude, resultToUser.Latitude, resultToUser.Longitude) > resultToUser.Distance)
+                if (theMatrix.GetDistance(user.Latitude, user.Longitude, resultToUser.Latitude, resultToUser.Longitude) < resultToUser.Distance && resultToUser.PricePoint < user.Price)
                 {
                     newList.Add(user);
                 }
@@ -246,6 +252,7 @@ namespace GroupCapstone.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
@@ -258,29 +265,83 @@ namespace GroupCapstone.Controllers
         public ActionResult Done([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude,PricePoint,Distance,HomeRating")] ApplicationUser applicationuser)
         {
             //find pickup pass in to view
+
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            var secondResult = from row in db.Users where row.Id == resultToUser.OtherId select row;
+            var finalResult = secondResult.FirstOrDefault();
+            finalResult.Rating = finalResult.Rating + applicationuser.Rating;
+
             if (ModelState.IsValid)
             {
-                db.Entry(applicationuser).State = EntityState.Modified;
+
+                db.Entry(finalResult).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Home", "ApplicationUsers");
+                return RedirectToAction("UserHome", "ApplicationUsers");
             }
             var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
             ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
             return View();
         }
 
-        public ActionResult CustomerConf()
+        public ActionResult WorkConf()
         {
             string sameUser = User.Identity.GetUserId();
             var result = from row in db.Users where row.Id == sameUser select row;
             var resultToUser = result.FirstOrDefault();
             WeatherConnectionJob connect = new WeatherConnectionJob();
-            connect.SendNot(resultToUser);
+            connect.SendNotification(resultToUser);
             return View(resultToUser);
         }
 
+
+        public ActionResult PaymentMessage()
+        {
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            return View(resultToUser);
+        }
+
+
+        public ActionResult HomeRate(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            return View(applicationUser);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult HomeRate([Bind(Include = "Id,Address,FirstName,LastName,Rating,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Description,Price,Shovelee,Latitude,Longitude,PricePoint,Distance,HomeRating")] ApplicationUser applicationuser)
+        {
+            //find pickup pass in to view
+            string sameUser = User.Identity.GetUserId();
+            var result = from row in db.Users where row.Id == sameUser select row;
+            var resultToUser = result.FirstOrDefault();
+            var secondResult = from row in db.Users where row.Id == resultToUser.OtherId select row;
+            var finalResult = secondResult.FirstOrDefault();
+            finalResult.HomeRating = finalResult.HomeRating + applicationuser.HomeRating;
+            WeatherConnectionJob connect = new WeatherConnectionJob();
+            connect.SendNot(resultToUser);
+            if (ModelState.IsValid)
+            {
+
+                db.Entry(finalResult).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserHome", "ApplicationUsers");
+            }
+            var stripePublishKey = ConfigurationManager.AppSettings[HelperClasses.APIKeys.StripePublishableKey];
+            ViewBag.StripePublishKey = HelperClasses.APIKeys.StripePublishableKey;
+            return View();
+        }
         //public ActionResult GetZipMap()
         //{
         //    foreach (ApplicationUser a in db.Users)
